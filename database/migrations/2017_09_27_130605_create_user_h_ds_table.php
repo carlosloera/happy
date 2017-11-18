@@ -16,7 +16,7 @@ class CreateUserHDsTable extends Migration
         Schema::create('user_h_ds', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username',100);
-            $table->string('password',100);
+            $table->string('password',300)->change();
             $table->string('remember_token',100);
             $table->integer('id_restaurante')->length(11)->unsigned();
             $table->integer('id_restaurante2')->length(11)->unsigned();
@@ -54,5 +54,10 @@ class CreateUserHDsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('user_h_ds');
+
+        Schema::table('user_h_ds', function (Blueprint $table) {
+            $table->string('password')->change();
+        });
+
     }
 }
